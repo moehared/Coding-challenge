@@ -48,4 +48,15 @@ const SHADOWS = {
   },
 };
 
+export type BorderWidthSize = "thin" | "standard" | "thick";
+const borderWidths = {
+  thin: 1,
+  standard: 2,
+  thick: 3,
+};
+
+export function borderWidth(size: BorderWidthSize = "standard"): number {
+  return borderWidths[size];
+}
+
 export { COLORS, FONT, SIZES, SHADOWS };
