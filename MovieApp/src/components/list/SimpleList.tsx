@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Divider from "../Divider";
-import { Card } from "./card/Card";
+import { Card } from "../card/Card";
 
 const SimpleListCard = ({
   cardWrapper = true,

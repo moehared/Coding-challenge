@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { COLORS } from "../../../constants";
-import { borderWidth, SIZES } from "../../../constants/theme";
+import { COLORS } from "../../constants";
+import { borderWidth, SIZES } from "../../constants/theme";
 
 interface CardProps {
   verticalInset?: boolean;
