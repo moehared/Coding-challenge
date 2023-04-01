@@ -10,18 +10,45 @@ import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { COLORS, SIZES } from "../../constants";
 import { CustomFlatList } from "../list/CustomFlatList";
-import { MovieTabBarClicableButton } from "./MovieTabBarClicableButton";
+import { MovieTabBarClickableButton } from "./MovieTabBarClicableButton";
+import { AppRoutesNavigationProp } from "../../navigation/AppRoute";
+import { useNavigation } from "@react-navigation/native";
 
-const movieTypes = ["All", "Action", "Comedy", "Horror", "Romance"];
+const movieTypes = ["movie", "series", "episode"];
+
 export const Welcome = () => {
-  const [activeMovieTab, setActiveMovieTab] = React.useState(
-    movieTypes[0] || ""
-  );
-
+  const [activeMovieTab, setActiveMovieTab] = useState(movieTypes[0]);
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigation<AppRoutesNavigationProp>();
 
   const handleSearchInput = (value: string) => {
     setSearchText(value);
+  };
+
+  const onNavigateToSearch = (movieType?: string) => {
+    const searchTerm = movieType || searchText;
+
+    if (!searchTerm) {
+      alert("Please enter a movie to search");
+      return;
+    }
+
+    navigate.navigate("search", {
+      searchTerm,
+    });
+  };
+
+  const renderTabButtons = (item: string, index: number) => {
+    return (
+      <MovieTabBarClickableButton
+        activeTab={activeMovieTab}
+        selectedTab={item}
+        onPress={() => {
+          setActiveMovieTab(item);
+          onNavigateToSearch(item);
+        }}
+      />
+    );
   };
 
   return (
@@ -40,23 +67,17 @@ export const Welcome = () => {
             onChangeText={handleSearchInput}
           />
         </View>
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.searchBtn}
+          onPress={() => onNavigateToSearch()}
+        >
           <Icon name={"search"} size={25} color={COLORS.white} />
         </TouchableOpacity>
       </View>
       <View style={styles.tabsContainer}>
         <CustomFlatList
           data={movieTypes}
-          renderRow={(item, _, _2) => (
-            <MovieTabBarClicableButton
-              activeMovieTab={activeMovieTab}
-              selectedTab={item}
-              setActiveMovieTab={setActiveMovieTab}
-              onPress={() => {
-                setActiveMovieTab(item);
-              }}
-            />
-          )}
+          renderRow={(item, index, showBorder) => renderTabButtons(item, index)}
           keyExtractor={(item) => item}
           horizontal
           contentContainerStyle={{
@@ -120,13 +141,6 @@ export const styles = StyleSheet.create({
     width: "100%",
     marginTop: SIZES.medium,
   },
-  tab: {
-    paddingVertical: SIZES.small / 2,
-    paddingHorizontal: SIZES.small,
-    borderRadius: SIZES.medium,
-    borderWidth: 1,
-  },
-  tabText: {},
   listRowDividers: {
     height: SIZES.medium,
     backgroundColor: "transparent",

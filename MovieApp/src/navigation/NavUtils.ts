@@ -1,4 +1,3 @@
-import type { NavigationProp } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 
 /**
@@ -14,19 +13,3 @@ export type NavigatePropParameters<T extends StackNavigationProp<any>> =
           : [K, PL[K]];
       }[keyof PL]
     : never;
-
-/**
- * Used in order to type an object that holds screens (for example, Modals)
- */
-export type RoutesObject<T extends Record<string, any>> = Record<
-  keyof T,
-  React.ComponentType<any>
->;
-
-type NavigationParams = object | undefined;
-
-export type NavigationDetails<T extends NavigationParams = NavigationParams> =
-  readonly [string, T];
-
-export type Navigate<T extends {} = ReactNavigation.RootParamList> =
-  NavigationProp<T>["navigate"];

@@ -6,17 +6,14 @@ import {
 } from "@react-navigation/native";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { NavigatePropParameters } from "./NavUtils";
-import { SearchParamsList } from "./search/routes";
 
 export type AppRoutesParamList = {
   Home: undefined;
-  Details: { movieId: number };
-  search: NavigatorScreenParams<SearchParamsList>;
+  Details: { imdbID: String };
+  search: { searchTerm: string };
 };
 
-export type AppRoutesNavigationProp = StackNavigationProp<AppRoutesParamList>;
-
-export type AppRoutesNavigationPropV2 = WithAppRoutes<
+export type AppRoutesNavigationProp = WithAppRoutes<
   StackNavigationProp<AppRoutesParamList>
 >;
 
@@ -27,7 +24,7 @@ export type AppRoutesNavigateParams =
   NavigatePropParameters<AppRoutesNavigationProp>;
 
 /**
- * Helper type to compose a navigation stack's StackNavigationProp with the App's modals
+ * Helper type to compose a navigation stack's StackNavigationProp with the app's routes.
  */
 export type WithAppRoutes<
   T extends StackNavigationProp<ParamListBase, string>

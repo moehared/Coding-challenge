@@ -3,31 +3,31 @@ import React from "react";
 import { COLORS, SIZES } from "../../constants";
 import ActiveMovieTabText from "./ActiveMovieTabText";
 
-interface MovieTabBarClicableButtonProps {
-  activeMovieTab: string;
+interface MovieTabBarClickableButtonProps {
+  activeTab: string;
   selectedTab: string;
-  setActiveMovieTab: (tab: string) => void;
   onPress: () => void;
 }
 
-export const MovieTabBarClicableButton = ({
-  activeMovieTab,
+export const MovieTabBarClickableButton = ({
+  activeTab,
   selectedTab,
-  setActiveMovieTab,
   onPress,
-}: MovieTabBarClicableButtonProps) => {
+}: MovieTabBarClickableButtonProps) => {
   const borderColor =
-    activeMovieTab === selectedTab ? COLORS.secondary : COLORS.gray2;
+    activeTab === selectedTab ? COLORS.secondary : COLORS.gray2;
   return (
     <TouchableOpacity
-      style={[styles.tab, { borderColor }]}
-      onPress={() => {
-        setActiveMovieTab(selectedTab);
-        onPress();
-      }}
+      style={[
+        styles.tab,
+        {
+          borderColor,
+        },
+      ]}
+      onPress={onPress}
     >
       <ActiveMovieTabText
-        activeMovieTab={activeMovieTab}
+        activeMovieTab={activeTab}
         selectedTab={selectedTab}
       />
     </TouchableOpacity>

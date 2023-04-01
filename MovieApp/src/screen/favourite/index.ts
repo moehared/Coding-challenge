@@ -1,1 +1,1 @@
-export { FavouriteScreenContainer } from './FavouriteScreenContainer';
+export { FavouriteScreen } from "./FavouriteScreen";

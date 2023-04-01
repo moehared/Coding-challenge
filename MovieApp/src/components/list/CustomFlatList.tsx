@@ -7,6 +7,8 @@ interface CustomFlatListProps<T> {
   keyExtractor: (item: T) => string | number;
   horizontal?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
+  numColumns?: number;
+  columnWrapperStyle?: StyleProp<ViewStyle>;
 }
 
 export const CustomFlatList = <T,>({
@@ -14,6 +16,8 @@ export const CustomFlatList = <T,>({
   renderRow,
   horizontal = false,
   contentContainerStyle,
+  numColumns = 1,
+  columnWrapperStyle,
 }: CustomFlatListProps<T>) => {
   return (
     <FlatList
@@ -25,6 +29,8 @@ export const CustomFlatList = <T,>({
       renderItem={({ item, index }) =>
         renderRow(item, index, index < data.length - 1)
       }
+      numColumns={numColumns}
+      columnWrapperStyle={columnWrapperStyle}
     />
   );
 };

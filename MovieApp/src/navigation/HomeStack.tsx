@@ -2,9 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { COLORS } from "../constants";
 import { AppRoutesParamList } from "./AppRoute";
-import { HomeScreenContainer } from "../screen/home";
-import DetailsScreen from "../screen/detail/DetailsScreen";
 import SearchScreen from "../screen/search/SearchScreen";
+import { DetailsScreen } from "../screen/detail/DetailsScreen";
+import { HomeScreen } from "../screen/home";
 
 const Stack = createStackNavigator<AppRoutesParamList>();
 
@@ -23,9 +23,22 @@ export const HomeStack = () => (
         title: "Home",
       }}
       name="Home"
-      component={HomeScreenContainer}
+      component={HomeScreen}
     />
-    <Stack.Screen name="Details" component={DetailsScreen} />
-    <Stack.Screen name="search" component={SearchScreen} />
+    <Stack.Screen
+      name="Details"
+      component={DetailsScreen}
+      options={{
+        headerShown: true,
+      }}
+    />
+    <Stack.Screen
+      name="search"
+      component={SearchScreen}
+      options={{
+        headerShown: true,
+        title: "",
+      }}
+    />
   </Stack.Navigator>
 );

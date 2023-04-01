@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { RouteProp } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { HomeStack } from "./HomeStack";
-import { FavouriteScreenContainer } from "../screen/favourite";
 import { COLORS } from "../constants";
 import { SettingScreen } from "../screen/setting/SettingScreen";
+import { FavouriteScreen } from "../screen/favourite";
 
 type TabRoutes = {
   Home: undefined;
@@ -65,7 +65,7 @@ const AppTabs = () => {
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Favorite" component={FavouriteScreenContainer} />
+      <Tab.Screen name="Favorite" component={FavouriteScreen} />
       <Tab.Screen name="Setting" component={SettingScreen} />
     </Tab.Navigator>
   );
